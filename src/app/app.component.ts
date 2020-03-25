@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'BestPizzaAdmin';
+
+  onActivate(event) {
+    window.scroll(0, 0);
+  }
 }
