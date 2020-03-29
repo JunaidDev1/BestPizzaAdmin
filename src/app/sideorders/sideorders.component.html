@@ -1,0 +1,77 @@
+<div class="row mt-2">
+
+    <div class="col-md-12 my-3">
+        <h4>Side Orders ({{allMeals.length}})
+            <button data-toggle="modal" data-target="#addMeal" class="btn btn-primary float-right">Add New Meal</button>
+        </h4>
+    </div>
+
+    <div class="input-group mb-3 mx-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fa fa-search"></i>
+            </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search here...">
+    </div>
+
+    <table class="table table-bordered table-hover bg-white mx-3">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Meal Name</th>
+                <th>Meal Price</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let meal of allMeals; index as i">
+                <td>{{i+1}}</td>
+                <td>{{meal.name}}</td>
+                <td>RS. {{meal.price}}</td>
+                <td class="text-center">
+                    <button class="btn btn-primary mx-2">
+                        <i class="fa fa-edit"></i> Update
+                    </button>
+                    <button class="btn btn-danger mx-2">
+                        <i class="fa fa-trash"></i> Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal" id="addMeal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">New Meal</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="w-100">Meal Name</label>
+                    <input [(ngModel)]="meal.name" type="text" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label class="w-100">Meal Price (RS.)</label>
+                    <input [(ngModel)]="meal.price" type="number" class="form-control" placeholder="Price">
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button [disabled]="!meal.name || !meal.price" (click)="addMeal()" type="button" class="btn btn-primary"
+                    data-dismiss="modal">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>

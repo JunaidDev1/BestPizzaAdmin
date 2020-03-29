@@ -40,6 +40,31 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
+
+    <ul class="nav nav-tabs shadow">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#home">Hot Deals</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu1">Side Orders</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu2">Combo Deals</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane container active" id="home">
+            <app-deals></app-deals>
+        </div>
+        <div class="tab-pane container fade" id="menu1">
+            <app-sideorders></app-sideorders>
+        </div>
+        <div class="tab-pane container fade" id="menu2">
+            <app-combodeals></app-combodeals>
+        </div>
+    </div>
 </div>
 
 <app-footer></app-footer>

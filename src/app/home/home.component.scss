@@ -9,3 +9,21 @@
     color: var(--warning);
   }
 }
+
+.nav-tabs {
+  justify-content: center;
+  padding: 3em;
+  background: #ffffff;
+  border: none;
+  .nav-item {
+    width: 150px;
+    text-align: center;
+    .nav-link {
+      border-radius: 30px;
+      &.active {
+        color: #ffffff;
+        background-color: #4a3427;
+      }
+    }
+  }
+}

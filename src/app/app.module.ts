@@ -8,6 +8,13 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { DealsComponent } from './deals/deals.component';
+import { CombodealsComponent } from './combodeals/combodeals.component';
+import { SideordersComponent } from './sideorders/sideorders.component';
+import { PizzaComponent } from './pizza/pizza.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { NgxLoadingModule } from 'ngx-loading';
+import { FormsModule } from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "AIzaSyAXCOrAkv40o6thOiiw8PgCnmDmSg9FTYk",
@@ -28,10 +35,19 @@ firebase.initializeApp(firebaseConfig);
     HomeComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DealsComponent,
+    CombodealsComponent,
+    SideordersComponent,
+    PizzaComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    NgxLoadingModule.forRoot({
+      fullScreenBackdrop: true
+    }),
     AppRoutingModule
   ],
   providers: [],
