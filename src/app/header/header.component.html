@@ -12,14 +12,14 @@
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-3">
+            <li [routerLinkActive]="['activeLink']" routerLink="/pizza" class="nav-item mx-3">
                 <a class="nav-link text-light pointer"><i class="fa fa-cube mr-1"></i> Pizza</a>
+            </li>
+            <li [routerLinkActive]="['activeLink']" routerLink="/gallery" class="nav-item mx-3">
+                <a class="nav-link text-light pointer"><i class="fa fa-images mr-1"></i> Gallery</a>
             </li>
             <li class="nav-item mx-3">
                 <a class="nav-link text-light pointer"><i class="fas fa-bullhorn mr-1"></i> New Arrival</a>
-            </li>
-            <li class="nav-item mx-3">
-                <a class="nav-link text-light pointer"><i class="fa fa-images mr-1"></i> Gallery</a>
             </li>
             <li class="nav-item mx-3">
                 <a class="nav-link text-light pointer"><i class="fa fa-user mr-1"></i> Account</a>

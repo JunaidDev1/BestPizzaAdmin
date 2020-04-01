@@ -12,7 +12,7 @@
                 <i class="fa fa-search"></i>
             </span>
         </div>
-        <input type="text" class="form-control" placeholder="Search here...">
+        <input [(ngModel)]="searchTxt" type="text" class="form-control" placeholder="Search here...">
     </div>
 
     <table class="table table-bordered table-hover bg-white mx-3">
@@ -25,16 +25,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let meal of allMeals; index as i">
+            <tr *ngFor="let meal of allMeals | search: searchTxt; index as i">
                 <td>{{i+1}}</td>
                 <td>{{meal.name}}</td>
                 <td>RS. {{meal.price}}</td>
                 <td class="text-center">
-                    <button class="btn btn-primary mx-2">
+                    <button data-target="#addMeal" data-toggle="modal" (click)="updateMeal(meal)"
+                        class="btn btn-primary mx-2">
                         <i class="fa fa-edit"></i> Update
                     </button>
-                    <button class="btn btn-danger mx-2">
-                        <i class="fa fa-trash"></i> Delete
+                    <button (click)="deleteMeal(meal, i)" data-target="#deleteMeal" data-toggle="modal"
+                        class="btn btn-danger mx-2"><i class="fa fa-trash"></i> Delete
                     </button>
                 </td>
             </tr>
@@ -72,6 +73,29 @@
                     data-dismiss="modal">Submit</button>
             </div>
 
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="deleteMeal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Delete this meal?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to permanently remove this meal?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                <button (click)="removeFirebaseMeal()" type="button" class="btn btn-danger"
+                    data-dismiss="modal">Remove</button>
+            </div>
         </div>
     </div>
 </div>

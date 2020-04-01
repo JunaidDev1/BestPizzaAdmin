@@ -3,4 +3,13 @@ nav {
   img {
     width: 120px;
   }
+  .activeLink {
+    .nav-link {
+      color: var(--warning) !important;
+    }
+  }
+}
+
+*:focus {
+  outline: none !important;
 }
