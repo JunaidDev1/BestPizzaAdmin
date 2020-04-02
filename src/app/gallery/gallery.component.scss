@@ -1,0 +1,12 @@
+.anItem {
+    img {
+        height: 100px;
+        object-fit: cover;
+    }
+    label:hover {
+        color: var(--success);
+    }
+}
+input[type="file"] {
+    display: none;
+}
