@@ -8,8 +8,13 @@ import * as firebase from 'firebase';
 })
 export class CombodealsComponent implements OnInit {
 
+  deal: any = {
+    items: []
+  };
   comboDeals: any = [];
   loading: boolean = false;
+  dealItem: any = '';
+  activeIndex: any;
 
   constructor() {
     this.getAllDeals();
@@ -36,5 +41,69 @@ export class CombodealsComponent implements OnInit {
       })
   }
 
+
+  addNewDeal() {
+    this.deal = { items: [] };
+  }
+
+  addItem() {
+    if (this.dealItem != '') {
+      this.deal.items.push(this.dealItem);
+      this.dealItem = '';
+    }
+  }
+
+  removeItem(index) {
+    this.deal.items.splice(index, 1);
+  }
+
+  editDeal(deal, index) {
+    this.activeIndex = index;
+    this.deal = Object.assign({}, deal);
+    this.deal.items = [];
+    deal.items.forEach(element => {
+      this.deal.items.push(element);
+    });
+  }
+
+  deleteDeal(index) {
+    this.activeIndex = index;
+  }
+
+
+  saveDeal() {
+    var self = this;
+    var postKey;
+    var updates = {};
+    if (!self.deal.key) {
+      self.deal.timestamp = Number(new Date());
+      self.deal.uid = 'xqI3oZ7q3AYFyYZA8NRPrjqvGGE2';
+      postKey = firebase.database().ref().child('comboDeals').push().key;
+      self.deal.key = postKey;
+      self.comboDeals.push(self.deal);
+    } else {
+      postKey = self.deal.key;
+    }
+    updates['/comboDeals/' + postKey] = self.deal;
+    firebase.database().ref().update(updates).then(() => {
+      alert('Deal saved successfully!!!');
+      if (!self.deal.key) {
+        self.deal = {};
+      } else {
+        self.comboDeals[self.activeIndex] = self.deal;
+      }
+    })
+  }
+
+
+  removeFirebaseDeal() {
+    var self = this;
+    var updates = {};
+    updates['/comboDeals/' + self.comboDeals[self.activeIndex].key] = null;
+    firebase.database().ref().update(updates).then(() => {
+      alert('Deal removed permanently!!');
+      self.comboDeals.splice(self.activeIndex, 1);
+    })
+  }
 
 }

@@ -2,21 +2,100 @@
 
     <div class="col-md-12 my-3">
         <h4>Combo Deals ({{comboDeals.length}})
-            <button class="btn btn-primary float-right">Add New Deal</button>
+            <button (click)="addNewDeal()" data-target="#addComboDeal" data-toggle="modal"
+                class="btn btn-primary float-right">Add New Deal</button>
         </h4>
     </div>
 
     <div *ngFor="let deal of comboDeals; index as i" class="col-md-3 mb-4">
         <div class="anItem bg-white rounded shadow-sm pointer p-3">
-            <img class="w-100 mb-2" src="/assets/imgs/food10.jpeg">
+            <img class="w-100 mb-2" [src]="deal.imageUrl || '/assets/imgs/icon.jpg'">
             <h4>{{deal.name}}</h4>
             <p *ngFor="let item of deal.items" class="mb-0">{{item}}</p>
             <h3 class="mb-0 mt-2">
                 <span class="badge badge-warning">RS. {{deal.price}}</span>
-                <span class="float-right">
+                <span data-target="#deleteComboDeal" data-toggle="modal" (click)="deleteDeal(i)"
+                    class="float-right ml-3">
+                    <i class="fa fa-trash text-danger"></i>
+                </span>
+                <span data-target="#addComboDeal" data-toggle="modal" (click)="editDeal(deal, i)" class="float-right">
                     <i class="fa fa-edit text-primary"></i>
                 </span>
             </h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="addComboDeal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Deal</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="w-100">Deal Image Url*</label>
+                    <input class="form-control" [(ngModel)]="deal.imageUrl" type="text" placeholder="Paste Url">
+                </div>
+                <div class="form-group">
+                    <label class="w-100">Deal Name*</label>
+                    <input class="form-control" [(ngModel)]="deal.name" type="text" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label class="w-100">Deal Price*</label>
+                    <input class="form-control" [(ngModel)]="deal.price" type="number" placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label class="w-100">Deal Items / Meals</label>
+                    <ul *ngIf="deal.items.length">
+                        <li *ngFor="let item of deal.items; index as i">{{item}}
+                            <i (click)="removeItem(i)" class="fa fa-times text-danger float-right mr-3 pointer"></i>
+                        </li>
+                    </ul>
+                    <div class="input-group">
+                        <input (keyup.enter)="addItem()" type="text" [(ngModel)]="dealItem" class="form-control"
+                            placeholder="Deal Items">
+                        <div class="input-group-prepend">
+                            <span (click)="addItem()" class="input-group-text">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button [disabled]="!deal.imageUrl || !deal.name || !deal.price || !deal.items.length"
+                    (click)="saveDeal()" type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="deleteComboDeal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Delete this deal?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to permanently remove this deal?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                <button (click)="removeFirebaseDeal()" type="button" class="btn btn-danger"
+                    data-dismiss="modal">Remove</button>
+            </div>
         </div>
     </div>
 </div>
