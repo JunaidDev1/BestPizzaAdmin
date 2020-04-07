@@ -1,0 +1,13 @@
+.anItem {
+    position: relative;
+    height: 370px;
+    .bottomContent {
+        position: absolute;
+        width: 90%;
+        bottom: 1rem;
+    }
+    img {
+        height: 120px;
+        object-fit: cover;
+    }
+}
