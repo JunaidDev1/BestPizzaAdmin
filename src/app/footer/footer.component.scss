@@ -1,11 +1,11 @@
 footer {
   background: #231f20;
   border-top: 2px solid var(--warning);
-  i {
+  img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: #ffffff;
-    padding-top: 11px;
+    object-fit: cover;
+    margin: 0 5px;
   }
 }

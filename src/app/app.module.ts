@@ -14,7 +14,7 @@ import { SideordersComponent } from './sideorders/sideorders.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { NgxLoadingModule } from 'ngx-loading';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
 
 var firebaseConfig = {
@@ -47,6 +47,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxLoadingModule.forRoot({
       fullScreenBackdrop: true
     }),

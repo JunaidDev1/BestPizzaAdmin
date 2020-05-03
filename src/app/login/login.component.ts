@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +10,79 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user: any = {};
+  onLoginForm: FormGroup;
+  email: string = '';
+  resetEmail: string;
+  password: string = '';
+  loading: boolean = false;
+  uid: string = '';
 
   constructor(
-    public router: Router
-  ) { }
-
-  ngOnInit() {
+    public router: Router,
+    public _fb: FormBuilder
+  ) {
+    localStorage.setItem('userLoggedIn', 'false');
   }
 
 
-  onLogin() {
-    if (this.user.email == 'admin@bestpizza.com' && this.user.password == 112233) {
-      this.router.navigate(['/home']);
-    } else {
-      alert('Invalid email or password!');
-    }
+  ngOnInit() {
+    this.onLoginForm = this._fb.group({
+      email: ['', Validators.compose([
+        Validators.required
+      ])],
+      password: ['', Validators.compose([
+        Validators.required
+      ])]
+    })
+  }
+
+
+  userLogin() {
+    this.loading = true;
+    firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then((user) => {
+        if (user) {
+          this.uid = firebase.auth().currentUser.uid;
+          this.getUserData();
+        }
+      })
+      .catch((e) => {
+        this.loading = false;
+        alert(e.message);
+      })
+  }
+
+
+  getUserData() {
+    firebase.database().ref().child('users/' + this.uid)
+      .once('value', (snapshot) => {
+        var user = snapshot.val();
+        alert("You are successfully logged in!");
+        localStorage.setItem('firstName', user.firstName);
+        localStorage.setItem('lastName', user.lastName);
+        localStorage.setItem('email', user.email);
+        localStorage.setItem('uid', this.uid);
+        localStorage.setItem('userLoggedIn', 'true');
+        this.loading = false;
+        this.router.navigate(['/home']);
+      })
+      .catch((e) => {
+        this.loading = false;
+        alert(e.message);
+      })
+  }
+
+
+  resetPassword() {
+    firebase.auth().sendPasswordResetEmail(this.email)
+      .then(() => {
+        alert('Check your email and click the link to reset your password!');
+        this.email = '';
+      })
+      .catch((e) => {
+        this.email = '';
+        alert(e);
+      })
   }
 
 }
