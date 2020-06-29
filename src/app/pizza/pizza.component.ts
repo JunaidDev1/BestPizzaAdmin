@@ -63,7 +63,7 @@ export class PizzaComponent implements OnInit {
     var updates = {};
     if (!self.pizza.key) {
       self.pizza.timestamp = Number(new Date());
-      self.pizza.uid = 'xqI3oZ7q3AYFyYZA8NRPrjqvGGE2';
+      self.pizza.uid = localStorage.getItem('uid');
       postKey = firebase.database().ref().child('pizzas').push().key;
       self.pizza.key = postKey;
       self.allPizzas.push(self.pizza);

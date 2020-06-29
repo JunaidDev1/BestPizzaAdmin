@@ -25,7 +25,7 @@ export class GalleryComponent implements OnInit {
     var self = this;
     self.loading = true;
     firebase.database().ref().child('gallery')
-      .orderByChild('uid').equalTo('xqI3oZ7q3AYFyYZA8NRPrjqvGGE2')
+      .orderByChild('uid').equalTo(localStorage.getItem('uid'))
       .once('value', (snapshot) => {
         var data = snapshot.val();
         for (var key in data) {
@@ -100,7 +100,7 @@ export class GalleryComponent implements OnInit {
     var updates = {};
     var temp = {
       imageUrl: downloadURL,
-      uid: 'xqI3oZ7q3AYFyYZA8NRPrjqvGGE2',
+      uid: localStorage.getItem('uid'),
       timestamp: Number(new Date())
     }
     updates['/gallery/' + postKey] = temp;
