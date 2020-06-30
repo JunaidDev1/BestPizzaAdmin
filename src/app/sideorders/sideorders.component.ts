@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { Sideorders } from './../models/sideorders';
+import { Constant } from '../models/constant.enum';
 
 @Component({
   selector: 'app-sideorders',
@@ -8,8 +10,8 @@ import * as firebase from 'firebase';
 })
 export class SideordersComponent implements OnInit {
 
-  allMeals: any = [];
-  meal: any = {};
+  allMeals: Array<Sideorders>;
+  meal: Sideorders;
   activeIndex: any;
 
   constructor() {
@@ -48,12 +50,12 @@ export class SideordersComponent implements OnInit {
     var updates = {};
     updates['/sideorders/' + postKey] = self.meal;
     firebase.database().ref().update(updates).then(() => {
-      alert('Meal saved succefully!');
+      alert(Constant.DEAL_SUCCESS);
       if (!self.meal.key) {
         self.meal.key = postKey;
         self.allMeals.push(self.meal);
       }
-      self.meal = {};
+      self.meal = new Sideorders();
     })
   }
 
@@ -75,7 +77,7 @@ export class SideordersComponent implements OnInit {
     updates['/sideorders/' + this.meal.key] = null;
     firebase.database().ref().update(updates).then(() => {
       self.allMeals.splice(self.activeIndex, 1);
-      alert('Meal removed from database!');
+      alert(Constant.MEAL_REMOVED);
     })
   }
 

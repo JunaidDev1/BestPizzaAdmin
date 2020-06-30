@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { Deals } from '../models/deals';
+import { Constant } from '../models/constant.enum';
+
 
 @Component({
   selector: 'app-deals',
@@ -8,10 +11,8 @@ import * as firebase from 'firebase';
 })
 export class DealsComponent implements OnInit {
 
-  deal: any = {
-    items: []
-  };
-  allDeals: any = [];
+  deal: Deals;
+  allDeals: Array<Deals>;
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
@@ -45,7 +46,7 @@ export class DealsComponent implements OnInit {
 
 
   addNewDeal() {
-    this.deal = { items: [] };
+    this.deal = new Deals();
   }
 
   addItem() {
@@ -88,9 +89,9 @@ export class DealsComponent implements OnInit {
     }
     updates['/deals/' + postKey] = self.deal;
     firebase.database().ref().update(updates).then(() => {
-      alert('Deal saved successfully!!!');
+      alert(Constant.DEAL_SUCCESS);
       if (!self.deal.key) {
-        self.deal = {};
+        self.deal = new Deals();
       } else {
         self.allDeals[self.activeIndex] = self.deal;
       }
@@ -103,7 +104,7 @@ export class DealsComponent implements OnInit {
     var updates = {};
     updates['/deals/' + self.allDeals[self.activeIndex].key] = null;
     firebase.database().ref().update(updates).then(() => {
-      alert('Deal removed permanently!!');
+      alert(Constant.DEAL_REMOVE);
       self.allDeals.splice(self.activeIndex, 1);
     })
   }

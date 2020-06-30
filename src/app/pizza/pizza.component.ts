@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { Pizzas } from './../models/pizzas';
+import { Constant } from '../models/constant.enum';
 
 @Component({
   selector: 'app-pizza',
@@ -8,8 +10,8 @@ import * as firebase from 'firebase';
 })
 export class PizzaComponent implements OnInit {
 
-  pizza: any = {};
-  allPizzas: any = [];
+  pizza: Pizzas;
+  allPizzas: Array<Pizzas>;
   loading: boolean = false;
   activeIndex: any;
 
@@ -42,7 +44,7 @@ export class PizzaComponent implements OnInit {
 
 
   addNewDeal() {
-    this.pizza = {};
+    this.pizza = new Pizzas();
   }
 
 
@@ -72,9 +74,9 @@ export class PizzaComponent implements OnInit {
     }
     updates['/pizzas/' + postKey] = self.pizza;
     firebase.database().ref().update(updates).then(() => {
-      alert('Deal saved successfully!!!');
+      alert(Constant.DEAL_SUCCESS);
       if (!self.pizza.key) {
-        self.pizza = {};
+        self.pizza = new Pizzas();
       } else {
         self.allPizzas[self.activeIndex] = self.pizza;
       }
@@ -87,7 +89,7 @@ export class PizzaComponent implements OnInit {
     var updates = {};
     updates['/pizzas/' + self.allPizzas[self.activeIndex].key] = null;
     firebase.database().ref().update(updates).then(() => {
-      alert('Pizza removed permanently!!');
+      alert(Constant.PIZZA_REMOVE);
       self.allPizzas.splice(self.activeIndex, 1);
     })
   }

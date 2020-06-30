@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { Constant } from './../models/constant.enum';
 
 @Component({
   selector: 'app-login',
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
     firebase.database().ref().child('users/' + this.uid)
       .once('value', (snapshot) => {
         var user = snapshot.val();
-        alert("You are successfully logged in!");
+        alert(Constant.lOGGED_IN);
         localStorage.setItem('firstName', user.firstName);
         localStorage.setItem('lastName', user.lastName);
         localStorage.setItem('email', user.email);
@@ -76,7 +77,7 @@ export class LoginComponent implements OnInit {
   resetPassword() {
     firebase.auth().sendPasswordResetEmail(this.email)
       .then(() => {
-        alert('Check your email and click the link to reset your password!');
+        alert(Constant.RESET_LOGIN);
         this.email = '';
       })
       .catch((e) => {

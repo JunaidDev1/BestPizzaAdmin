@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { ComboDeals } from '../models/combo-deals';
+import { Constant } from '../models/constant.enum';
 
 @Component({
   selector: 'app-combodeals',
@@ -11,7 +13,7 @@ export class CombodealsComponent implements OnInit {
   deal: any = {
     items: []
   };
-  comboDeals: any = [];
+  comboDeals: Array<ComboDeals>;
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
@@ -86,7 +88,7 @@ export class CombodealsComponent implements OnInit {
     }
     updates['/comboDeals/' + postKey] = self.deal;
     firebase.database().ref().update(updates).then(() => {
-      alert('Deal saved successfully!!!');
+      alert(Constant.DEAL_SUCCESS);
       if (!self.deal.key) {
         self.deal = {};
       } else {
@@ -101,7 +103,7 @@ export class CombodealsComponent implements OnInit {
     var updates = {};
     updates['/comboDeals/' + self.comboDeals[self.activeIndex].key] = null;
     firebase.database().ref().update(updates).then(() => {
-      alert('Deal removed permanently!!');
+      alert(Constant.DEAL_REMOVE);
       self.comboDeals.splice(self.activeIndex, 1);
     })
   }

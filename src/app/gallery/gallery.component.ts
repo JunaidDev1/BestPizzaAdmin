@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { Gallery } from '../models/gallery';
+import { Constant } from '../models/constant.enum';
 
 @Component({
   selector: 'app-gallery',
@@ -8,7 +10,7 @@ import * as firebase from 'firebase';
 })
 export class GalleryComponent implements OnInit {
 
-  allImages: any = [];
+  allImages: Array<Gallery>;
   newImage: any;
   imageUrl: any;
   loading: boolean = false;
@@ -54,7 +56,7 @@ export class GalleryComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    alert('Link copied!!!');
+    alert(Constant.LINK_COPY);
   }
 
 
