@@ -79,7 +79,7 @@ export class CombodealsComponent implements OnInit {
     var updates = {};
     if (!self.deal.key) {
       self.deal.timestamp = Number(new Date());
-      self.deal.uid = 'xqI3oZ7q3AYFyYZA8NRPrjqvGGE2';
+      self.deal.uid = localStorage.getItem('uid');
       postKey = firebase.database().ref().child('comboDeals').push().key;
       self.deal.key = postKey;
       self.comboDeals.push(self.deal);
