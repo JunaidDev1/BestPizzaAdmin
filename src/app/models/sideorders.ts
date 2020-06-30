@@ -1,6 +1,6 @@
 export class Sideorders {
-    name: string;
-    price: number;
-    key: any;
+    public name: string;
+    public price: number;
+    public key: string;
 }
 

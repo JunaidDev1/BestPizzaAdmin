@@ -11,8 +11,8 @@ import { Constant } from '../models/constant.enum';
 })
 export class DealsComponent implements OnInit {
 
-  deal: Deals;
-  allDeals: Array<Deals>;
+  deal: Deals = new Deals();
+  allDeals: Array<Deals> = [];
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;

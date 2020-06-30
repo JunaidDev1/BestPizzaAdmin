@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { ComboDeals } from '../models/combo-deals';
 import { Constant } from '../models/constant.enum';
+import { Deals } from './../models/deals';
 
 @Component({
   selector: 'app-combodeals',
@@ -10,10 +10,8 @@ import { Constant } from '../models/constant.enum';
 })
 export class CombodealsComponent implements OnInit {
 
-  deal: any = {
-    items: []
-  };
-  comboDeals: Array<ComboDeals>;
+  deal: Deals = new Deals();
+  comboDeals: Array<Deals> = [];
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
@@ -45,7 +43,7 @@ export class CombodealsComponent implements OnInit {
 
 
   addNewDeal() {
-    this.deal = { items: [] };
+    this.deal = new Deals();
   }
 
   addItem() {
@@ -90,7 +88,7 @@ export class CombodealsComponent implements OnInit {
     firebase.database().ref().update(updates).then(() => {
       alert(Constant.DEAL_SUCCESS);
       if (!self.deal.key) {
-        self.deal = {};
+        self.deal = new Deals();
       } else {
         self.comboDeals[self.activeIndex] = self.deal;
       }

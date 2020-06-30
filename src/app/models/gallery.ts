@@ -1,6 +1,6 @@
 export class Gallery {
-    imageUrl: string;
-    timestamp: number;
-    uid: any;
-    key: any;
+    public imageUrl: string;
+    public timestamp: number;
+    public uid: string;
+    public key: string;
 }

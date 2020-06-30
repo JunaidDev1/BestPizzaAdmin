@@ -10,8 +10,8 @@ import { Constant } from '../models/constant.enum';
 })
 export class PizzaComponent implements OnInit {
 
-  pizza: Pizzas;
-  allPizzas: Array<Pizzas>;
+  pizza: Pizzas = new Pizzas();
+  allPizzas: Array<Pizzas> = [];
   loading: boolean = false;
   activeIndex: any;
 

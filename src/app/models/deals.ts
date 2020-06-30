@@ -1,8 +1,10 @@
 export class Deals {
-    key: any;
-    items: Array<string>;
-    name: string;
-    price: number;
-    timestamp: number;
-    uid: any;
+    public key: string;
+    public items: Array<string> = [];
+    public imageUrl?: string;
+    public name: string;
+    public price: number;
+    public timestamp: number;
+    public uid: string;
 }
+

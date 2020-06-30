@@ -10,7 +10,7 @@ import { Constant } from '../models/constant.enum';
 })
 export class GalleryComponent implements OnInit {
 
-  allImages: Array<Gallery>;
+  allImages: Array<Gallery> = [];
   newImage: any;
   imageUrl: any;
   loading: boolean = false;

@@ -10,8 +10,8 @@ import { Constant } from '../models/constant.enum';
 })
 export class SideordersComponent implements OnInit {
 
-  allMeals: Array<Sideorders>;
-  meal: Sideorders;
+  allMeals: Array<Sideorders> = [];
+  meal: Sideorders = new Sideorders();
   activeIndex: any;
 
   constructor() {

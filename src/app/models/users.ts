@@ -1,7 +1,7 @@
 export class Users {
-    email: string;
-    firstName: string;
-    lastName: string;
-    timestamp: number;
-    uid: any;
+    public email: string;
+    public firstName: string;
+    public lastName: string;
+    public timestamp: number;
+    public uid: string;
 }

@@ -1,11 +1,11 @@
 export class Pizzas {
-    imageUrl: string;
-    ingredients: string;
-    key: any;
-    large: number;
-    medium: number;
-    name: string;
-    small: number;
-    timestamp: number;
-    uid: any;
+    public imageUrl: string;
+    public ingredients: string;
+    public key: string;
+    public large: number;
+    public medium: number;
+    public name: string;
+    public small: number;
+    public timestamp: number;
+    public uid: string;
 }
