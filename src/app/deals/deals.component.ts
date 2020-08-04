@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { Deals } from '../models/deals';
 import { Constant } from '../models/constant.enum';
@@ -10,8 +10,9 @@ import { Constant } from '../models/constant.enum';
   styleUrls: ['./deals.component.scss']
 })
 export class DealsComponent implements OnInit {
-@Input() allDeals: Array<Deals> = [];
-modalClick:boolean;
+
+  @Input() allDeals: Array<Deals> = [];
+  modalClick: boolean;
   deal: Deals = new Deals();
   // allDeals: Array<Deals> = [];
   loading: boolean = false;
@@ -48,8 +49,12 @@ modalClick:boolean;
 
   addNewDeal() {
     this.deal = new Deals();
-    this.modalClick=true;
-    
+    this.modalClick = true;
+  }
+
+
+  closeModal(e: boolean) {
+    this.modalClick = e;
   }
 
   addItem() {
@@ -70,6 +75,7 @@ modalClick:boolean;
     deal.items.forEach(element => {
       this.deal.items.push(element);
     });
+    this.modalClick = true;
   }
 
   deleteDeal(index) {

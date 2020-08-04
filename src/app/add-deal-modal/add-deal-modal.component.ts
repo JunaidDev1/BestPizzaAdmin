@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Deals } from '../models/deals';
 import * as firebase from 'firebase';
 import { Constant } from '../models/constant.enum';
@@ -9,14 +9,18 @@ import { Constant } from '../models/constant.enum';
   styleUrls: ['./add-deal-modal.component.scss']
 })
 export class AddDealModalComponent implements OnInit {
+
   @Input() deal: Deals;
+  @Output() modalClosed = new EventEmitter<boolean>();
   allDeals: Array<Deals> = [];
   dealItem: any = '';
   activeIndex: any;
   constructor() { }
 
   ngOnInit() {
+
   }
+
   addItem() {
     if (this.dealItem != '') {
       this.deal.items.push(this.dealItem);
@@ -32,7 +36,12 @@ export class AddDealModalComponent implements OnInit {
   //   });
   // }
 
-  
+
+  emitCloseModal() {
+    this.modalClosed.emit(false);
+  }
+
+
   saveDeal() {
     var self = this;
     var postKey;
