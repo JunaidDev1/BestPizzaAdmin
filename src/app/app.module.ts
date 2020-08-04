@@ -15,6 +15,8 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
+import { AddDealModalComponent } from './add-deal-modal/add-deal-modal.component';
+import { DeleteDealModalComponent } from './delete-deal-modal/delete-deal-modal.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyAXCOrAkv40o6thOiiw8PgCnmDmSg9FTYk",
@@ -41,7 +43,9 @@ firebase.initializeApp(firebaseConfig);
     SideordersComponent,
     PizzaComponent,
     GalleryComponent,
-    SearchPipe
+    SearchPipe,
+    AddDealModalComponent,
+    DeleteDealModalComponent
   ],
   imports: [
     BrowserModule,

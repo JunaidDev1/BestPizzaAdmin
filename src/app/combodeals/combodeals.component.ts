@@ -17,29 +17,29 @@ export class CombodealsComponent implements OnInit {
   activeIndex: any;
 
   constructor() {
-    this.getAllDeals();
+    // this.getAllDeals();
   }
 
   ngOnInit() {
   }
 
 
-  getAllDeals() {
-    var self = this;
-    firebase.database().ref().child('comboDeals')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.comboDeals.push(temp);
-        }
-        self.comboDeals.reverse();
-      })
-      .catch((e) => {
-        console.log(e.message);
-      })
-  }
+  // getAllDeals() {
+  //   var self = this;
+  //   firebase.database().ref().child('comboDeals')
+  //     .once('value', (snapshot) => {
+  //       var data = snapshot.val();
+  //       for (var key in data) {
+  //         var temp = data[key];
+  //         temp.key = key;
+  //         self.comboDeals.push(temp);
+  //       }
+  //       self.comboDeals.reverse();
+  //     })
+  //     .catch((e) => {
+  //       console.log(e.message);
+  //     })
+  // }
 
 
   addNewDeal() {

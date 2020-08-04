@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { Deals } from '../models/deals';
 import { Constant } from '../models/constant.enum';
@@ -10,43 +10,46 @@ import { Constant } from '../models/constant.enum';
   styleUrls: ['./deals.component.scss']
 })
 export class DealsComponent implements OnInit {
-
+@Input() allDeals: Array<Deals> = [];
+modalClick:boolean;
   deal: Deals = new Deals();
-  allDeals: Array<Deals> = [];
+  // allDeals: Array<Deals> = [];
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
 
   constructor() {
-    this.getAllDeals();
+    // this.getAllDeals();
   }
 
   ngOnInit() {
   }
 
 
-  getAllDeals() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('deals')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.allDeals.push(temp);
-        }
-        self.loading = false;
-      })
-      .catch((e) => {
-        console.log(e.message);
-        self.loading = false;
-      })
-  }
+  // getAllDeals() {
+  //   var self = this;
+  //   self.loading = true;
+  //   firebase.database().ref().child('deals')
+  //     .once('value', (snapshot) => {
+  //       var data = snapshot.val();
+  //       for (var key in data) {
+  //         var temp = data[key];
+  //         temp.key = key;
+  //         self.allDeals.push(temp);
+  //       }
+  //       self.loading = false;
+  //     })
+  //     .catch((e) => {
+  //       console.log(e.message);
+  //       self.loading = false;
+  //     })
+  // }
 
 
   addNewDeal() {
     this.deal = new Deals();
+    this.modalClick=true;
+    
   }
 
   addItem() {
