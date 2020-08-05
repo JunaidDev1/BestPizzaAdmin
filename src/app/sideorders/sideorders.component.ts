@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { Sideorders } from './../models/sideorders';
 import { Constant } from '../models/constant.enum';
+import { Deals } from '../models/deals';
 
 @Component({
   selector: 'app-sideorders',
@@ -11,8 +11,8 @@ import { Constant } from '../models/constant.enum';
 export class SideordersComponent implements OnInit {
   
   modalClickDel:boolean;
-  allMeals: Array<Sideorders> = [];
-  meal: Sideorders = new Sideorders();
+  allMeals: Array<Deals> = [];
+  meal: Deals = new Deals();
   activeIndex: any;
   message:string;
 
@@ -32,7 +32,8 @@ export class SideordersComponent implements OnInit {
         for (var key in data) {
           var temp = data[key];
           temp.key = key;
-          temp.message="Side Order"
+          temp.message="Side Order";
+          temp.node="/sideorders/";
           self.allMeals.push(temp);
         }
       })
@@ -58,7 +59,7 @@ export class SideordersComponent implements OnInit {
         self.meal.key = postKey;
         self.allMeals.push(self.meal);
       }
-      self.meal = new Sideorders();
+      self.meal = new Deals();
     })
   }
 

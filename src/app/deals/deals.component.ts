@@ -86,7 +86,8 @@ export class DealsComponent implements OnInit {
     this.activeIndex = index;
     this.message=deal.message;
     this.modalClickDel = true;
-    console.log(this.message);
+    this.deal=deal;
+    this.activeIndex=index;
   }
 
 
@@ -115,15 +116,15 @@ export class DealsComponent implements OnInit {
   }
 
 
-  removeFirebaseDeal() {
-    var self = this;
-    var updates = {};
-    updates['/deals/' + self.allDeals[self.activeIndex].key] = null;
-    firebase.database().ref().update(updates).then(() => {
-      alert(Constant.DEAL_REMOVE);
-      self.allDeals.splice(self.activeIndex, 1);
-    })
-  }
+  // removeFirebaseDeal() {
+  //   var self = this;
+  //   var updates = {};
+  //   updates['/deals/' + self.allDeals[self.activeIndex].key] = null;
+  //   firebase.database().ref().update(updates).then(() => {
+  //     alert(Constant.DEAL_REMOVE);
+  //     self.allDeals.splice(self.activeIndex, 1);
+  //   })
+  // }
 
 
 

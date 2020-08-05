@@ -79,5 +79,5 @@
 
 
 <div *ngIf="modalClickDel" class="modal fade" id="deleteMeal">
-    <app-delete-deal-modal [message]="message" (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
+    <app-delete-deal-modal [deal]="meal" [allDeals]="allMeals" [activeIndex]="activeIndex" [message]="message" (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
 </div>

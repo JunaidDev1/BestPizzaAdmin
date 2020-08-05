@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
           var temp = data[key];
           temp.key = key;
           temp.message="Hot Deal";
+          temp.node="/deals/";
           self.allDeals.push(temp);
         }
         self.loading = false;
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit {
           var temp = data[key];
           temp.key = key;
           temp.message="Combo Deal";
+          temp.node="/comboDeals/";
           self.comboDeals.push(temp);
         }
         self.comboDeals.reverse();
