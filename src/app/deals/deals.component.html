@@ -18,7 +18,7 @@
             <p *ngFor="let item of deal.items" class="mb-0">{{item}}</p>
             <h3 class="mb-0 mt-2">
                 <span class="badge badge-warning">RS. {{deal.price}}</span>
-                <span data-target="#deleteDeal" data-toggle="modal" (click)="deleteDeal(i)" class="float-right ml-3">
+                <span data-target="#deleteDeal" data-toggle="modal" (click)="deleteDeal(deal, i)" class="float-right ml-3">
                     <i class="fa fa-trash text-danger"></i>
                 </span>
                 <span data-target="#addDeal" data-toggle="modal" (click)="editDeal(deal, i)" class="float-right">
@@ -36,5 +36,5 @@
 
 
 <div *ngIf="modalClickDel"  class="modal fade" id="deleteDeal">
-    <app-delete-deal-modal (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
+    <app-delete-deal-modal [message]="message" (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
 </div>

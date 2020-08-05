@@ -14,6 +14,7 @@ export class SideordersComponent implements OnInit {
   allMeals: Array<Sideorders> = [];
   meal: Sideorders = new Sideorders();
   activeIndex: any;
+  message:string;
 
   constructor() {
     this.getAllDeals();
@@ -31,6 +32,7 @@ export class SideordersComponent implements OnInit {
         for (var key in data) {
           var temp = data[key];
           temp.key = key;
+          temp.message="Side Order"
           self.allMeals.push(temp);
         }
       })
@@ -70,6 +72,7 @@ export class SideordersComponent implements OnInit {
     this.meal = meal;
     this.activeIndex = i;
     this.modalClickDel=true;
+    this.message=meal.message;
   }
 
 

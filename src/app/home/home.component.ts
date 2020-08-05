@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
         for (var key in data) {
           var temp = data[key];
           temp.key = key;
+          temp.message="Hot Deal";
           self.allDeals.push(temp);
         }
         self.loading = false;
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
         console.log(e.message);
         self.loading = false;
       })
+      console.log(this.allDeals);
   }
 
 
@@ -50,6 +52,7 @@ export class HomeComponent implements OnInit {
         for (var key in data) {
           var temp = data[key];
           temp.key = key;
+          temp.message="Combo Deal";
           self.comboDeals.push(temp);
         }
         self.comboDeals.reverse();
@@ -57,5 +60,6 @@ export class HomeComponent implements OnInit {
       .catch((e) => {
         console.log(e.message);
       })
+      console.log(this.comboDeals);
   }
 }

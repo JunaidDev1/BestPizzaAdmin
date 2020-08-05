@@ -12,6 +12,7 @@ import { Constant } from '../models/constant.enum';
 export class DealsComponent implements OnInit {
 
   @Input() allDeals: Array<Deals> = [];
+ message:string;
   modalClick: boolean;
   modalClickDel:boolean;
   deal: Deals = new Deals();
@@ -81,9 +82,11 @@ export class DealsComponent implements OnInit {
     this.modalClick = true;
   }
 
-  deleteDeal(index) {
+  deleteDeal(deal, index) {
     this.activeIndex = index;
+    this.message=deal.message;
     this.modalClickDel = true;
+    console.log(this.message);
   }
 
 
