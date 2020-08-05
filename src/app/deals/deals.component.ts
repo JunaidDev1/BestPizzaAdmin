@@ -13,6 +13,7 @@ export class DealsComponent implements OnInit {
 
   @Input() allDeals: Array<Deals> = [];
   modalClick: boolean;
+  modalClickDel:boolean;
   deal: Deals = new Deals();
   // allDeals: Array<Deals> = [];
   loading: boolean = false;
@@ -56,7 +57,9 @@ export class DealsComponent implements OnInit {
   closeModal(e: boolean) {
     this.modalClick = e;
   }
-
+  closeModalDel(e: boolean) {
+    this.modalClickDel = e;
+  }
   addItem() {
     if (this.dealItem != '') {
       this.deal.items.push(this.dealItem);
@@ -80,6 +83,7 @@ export class DealsComponent implements OnInit {
 
   deleteDeal(index) {
     this.activeIndex = index;
+    this.modalClickDel = true;
   }
 
 

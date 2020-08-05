@@ -41,7 +41,6 @@ export class AddDealModalComponent implements OnInit {
     this.modalClosed.emit(false);
   }
 
-
   saveDeal() {
     var self = this;
     var postKey;

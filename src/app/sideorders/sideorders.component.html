@@ -78,24 +78,6 @@
 </div>
 
 
-<div class="modal fade" id="deleteMeal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Delete this meal?</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                Are you sure you want to permanently remove this meal?
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-                <button (click)="removeFirebaseMeal()" type="button" class="btn btn-danger"
-                    data-dismiss="modal">Remove</button>
-            </div>
-        </div>
-    </div>
+<div *ngIf="modalClickDel" class="modal fade" id="deleteMeal">
+    <app-delete-deal-modal (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
 </div>

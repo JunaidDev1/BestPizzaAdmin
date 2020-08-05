@@ -9,7 +9,8 @@ import { Constant } from '../models/constant.enum';
   styleUrls: ['./sideorders.component.scss']
 })
 export class SideordersComponent implements OnInit {
-
+  
+  modalClickDel:boolean;
   allMeals: Array<Sideorders> = [];
   meal: Sideorders = new Sideorders();
   activeIndex: any;
@@ -68,6 +69,7 @@ export class SideordersComponent implements OnInit {
   deleteMeal(meal, i) {
     this.meal = meal;
     this.activeIndex = i;
+    this.modalClickDel=true;
   }
 
 
@@ -80,6 +82,8 @@ export class SideordersComponent implements OnInit {
       alert(Constant.MEAL_REMOVED);
     })
   }
-
+  closeModalDel(e: boolean) {
+    this.modalClickDel = e;
+  }
 
 }
