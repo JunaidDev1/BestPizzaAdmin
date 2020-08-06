@@ -15,6 +15,7 @@ export class AddDealModalComponent implements OnInit {
   allDeals: Array<Deals> = [];
   dealItem: any = '';
   activeIndex: any;
+
   constructor() { }
 
   ngOnInit() {

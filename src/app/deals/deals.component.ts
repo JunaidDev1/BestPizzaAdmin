@@ -12,41 +12,24 @@ import { Constant } from '../models/constant.enum';
 export class DealsComponent implements OnInit {
 
   @Input() allDeals: Array<Deals> = [];
- message:string;
+  @Input() firebaseNode: string;
+  @Input() deletionMsg: string;
+
+  message: string;
   modalClick: boolean;
-  modalClickDel:boolean;
+  modalClickDel: boolean;
   deal: Deals = new Deals();
-  // allDeals: Array<Deals> = [];
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
 
+
   constructor() {
-    // this.getAllDeals();
+
   }
 
   ngOnInit() {
   }
-
-
-  // getAllDeals() {
-  //   var self = this;
-  //   self.loading = true;
-  //   firebase.database().ref().child('deals')
-  //     .once('value', (snapshot) => {
-  //       var data = snapshot.val();
-  //       for (var key in data) {
-  //         var temp = data[key];
-  //         temp.key = key;
-  //         self.allDeals.push(temp);
-  //       }
-  //       self.loading = false;
-  //     })
-  //     .catch((e) => {
-  //       console.log(e.message);
-  //       self.loading = false;
-  //     })
-  // }
 
 
   addNewDeal() {
@@ -84,10 +67,10 @@ export class DealsComponent implements OnInit {
 
   deleteDeal(deal, index) {
     this.activeIndex = index;
-    this.message=deal.message;
+    this.message = deal.message;
     this.modalClickDel = true;
-    this.deal=deal;
-    this.activeIndex=index;
+    this.deal = deal;
+    this.activeIndex = index;
   }
 
 

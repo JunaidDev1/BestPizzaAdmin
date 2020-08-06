@@ -6,6 +6,11 @@ export enum Constant {
     LINK_COPY = 'Link copied!!!',
     PIZZA_REMOVE = 'Pizza removed permanently!!',
     MEAL_REMOVED = 'Meal removed from database!',
-    MEAL_SUCCESS = 'Meal saved succefully!'
-
+    MEAL_SUCCESS = 'Meal saved succefully!',
+    HOTDEAL_DELETION_MSG = 'Hot Deal',
+    COMBODEAL_DELETION_MSG = 'Combo Deal',
+    SIDEORDER_DELETION_MSG = 'Side Order',
+    HOTDEAL_NODE = '/deals/',
+    COMBODEAL_NODE = '/comboDeals/',
+    SIDEORDER_Node = '/sideorders/'
 }

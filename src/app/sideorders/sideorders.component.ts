@@ -9,12 +9,12 @@ import { Deals } from '../models/deals';
   styleUrls: ['./sideorders.component.scss']
 })
 export class SideordersComponent implements OnInit {
-  
-  modalClickDel:boolean;
+
+  modalClickDel: boolean;
   allMeals: Array<Deals> = [];
   meal: Deals = new Deals();
   activeIndex: any;
-  message:string;
+  message: string;
 
   constructor() {
     this.getAllDeals();
@@ -32,8 +32,6 @@ export class SideordersComponent implements OnInit {
         for (var key in data) {
           var temp = data[key];
           temp.key = key;
-          temp.message="Side Order";
-          temp.node="/sideorders/";
           self.allMeals.push(temp);
         }
       })
@@ -72,8 +70,8 @@ export class SideordersComponent implements OnInit {
   deleteMeal(meal, i) {
     this.meal = meal;
     this.activeIndex = i;
-    this.modalClickDel=true;
-    this.message=meal.message;
+    this.modalClickDel = true;
+    this.message = meal.message;
   }
 
 

@@ -51,19 +51,20 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#menu1">Side Orders</a>
         </li>
-        
+
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane container active" id="home">
-            <app-deals [allDeals]="allDeals"></app-deals>
+            <app-deals [deletionMsg]="dealDeletionMsg" [firebaseNode]="dealNode" [allDeals]="allDeals"></app-deals>
         </div>
         <div class="tab-pane container fade" id="menu2">
-            <app-deals [allDeals]="comboDeals"></app-deals>
+            <app-deals [deletionMsg]="comboDealDeletionMsg" [firebaseNode]="comboDealNode" [allDeals]="comboDeals">
+            </app-deals>
         </div>
         <div class="tab-pane container fade" id="menu1">
-            <app-sideorders></app-sideorders>
+            <app-sideorders [deletionMsg]="sideorderDeletionMsg" [firebaseNode]="sideorderNode"></app-sideorders>
         </div>
     </div>
 </div>
