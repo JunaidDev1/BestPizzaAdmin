@@ -12,5 +12,8 @@ export enum Constant {
     SIDEORDER_DELETION_MSG = 'Side Order',
     HOTDEAL_NODE = '/deals/',
     COMBODEAL_NODE = '/comboDeals/',
-    SIDEORDER_Node = '/sideorders/'
+    SIDEORDER_Node = '/sideorders/',
+    DEAL_NODE = 'deals',
+    COMBO_DEAL_NODE = 'comboDeals',
+    SIDE_ORDER_Node = 'sideorders'
 }

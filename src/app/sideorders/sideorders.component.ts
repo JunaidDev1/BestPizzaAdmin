@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { Constant } from '../models/constant.enum';
 import { Deals } from '../models/deals';
+import {DataHelperService} from '../data-helper.service';
 
 @Component({
   selector: 'app-sideorders',
@@ -16,28 +17,14 @@ export class SideordersComponent implements OnInit {
   activeIndex: any;
   message: string;
 
-  constructor() {
-    this.getAllDeals();
+  @Input() firebaseNode: string;
+  @Input() deletionMsg: string;
+
+  constructor(public service:DataHelperService) {
+    this.allMeals=this.service.allMeals
   }
 
   ngOnInit() {
-  }
-
-
-  getAllDeals() {
-    var self = this;
-    firebase.database().ref().child('sideorders')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.allMeals.push(temp);
-        }
-      })
-      .catch((e) => {
-        console.log(e.message);
-      })
   }
 
 
@@ -75,15 +62,6 @@ export class SideordersComponent implements OnInit {
   }
 
 
-  removeFirebaseMeal() {
-    var self = this;
-    var updates = {};
-    updates['/sideorders/' + this.meal.key] = null;
-    firebase.database().ref().update(updates).then(() => {
-      self.allMeals.splice(self.activeIndex, 1);
-      alert(Constant.MEAL_REMOVED);
-    })
-  }
   closeModalDel(e: boolean) {
     this.modalClickDel = e;
   }

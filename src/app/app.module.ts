@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DealsComponent } from './deals/deals.component';
-import { CombodealsComponent } from './combodeals/combodeals.component';
 import { SideordersComponent } from './sideorders/sideorders.component';
 import { PizzaComponent } from './pizza/pizza.component';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -39,7 +38,6 @@ firebase.initializeApp(firebaseConfig);
     HeaderComponent,
     FooterComponent,
     DealsComponent,
-    CombodealsComponent,
     SideordersComponent,
     PizzaComponent,
     GalleryComponent,

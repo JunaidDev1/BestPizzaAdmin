@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
 import { Deals } from '../models/deals';
 import { Constant } from '../models/constant.enum';
+import { DataHelperService} from '../data-helper.service'
 
 @Component({
   selector: 'app-home',
@@ -25,9 +25,9 @@ export class HomeComponent implements OnInit {
   comboDealNode: string;
   sideorderNode: string;
 
-  constructor() {
-    this.getAllDeals();
-    this.getComboAllDeals();
+  constructor(public service:DataHelperService) {
+    this.allDeals=this.service.allDeals;
+    this.comboDeals=this.service.comboDeals;
   }
 
   ngOnInit() {
@@ -38,44 +38,5 @@ export class HomeComponent implements OnInit {
     this.dealNode = Constant.HOTDEAL_NODE;
     this.comboDealNode = Constant.COMBODEAL_NODE;
     this.sideorderNode = Constant.SIDEORDER_Node;
-  }
-
-  getAllDeals() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('deals')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.allDeals.push(temp);
-        }
-        self.loading = false;
-      })
-      .catch((e) => {
-        console.log(e.message);
-        self.loading = false;
-      })
-    console.log(this.allDeals);
-  }
-
-
-  getComboAllDeals() {
-    var self = this;
-    firebase.database().ref().child('comboDeals')
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.comboDeals.push(temp);
-        }
-        self.comboDeals.reverse();
-      })
-      .catch((e) => {
-        console.log(e.message);
-      })
-    console.log(this.comboDeals);
   }
 }
