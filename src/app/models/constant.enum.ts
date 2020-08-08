@@ -12,8 +12,15 @@ export enum Constant {
     SIDEORDER_DELETION_MSG = 'Side Order',
     HOTDEAL_NODE = '/deals/',
     COMBODEAL_NODE = '/comboDeals/',
-    SIDEORDER_Node = '/sideorders/',
+    SIDEORDER_NODE = '/sideorders/',
     DEAL_NODE = 'deals',
     COMBO_DEAL_NODE = 'comboDeals',
-    SIDE_ORDER_Node = 'sideorders'
+    SIDE_ORDER_NODE = 'sideorders',
+    _GALLERY_NODE = 'gallery',
+    GALLERY_NODE = '/gallery/',
+    GALLERY_IMAGES= 'galleryImages/',
+    CONTENT_TYPE = 'image/jpeg/png',
+    _PIZZA_NODE='pizzas',
+    PIZZA_NODE='/pizzas/'
+
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Gallery } from '../models/gallery';
 import { Constant } from '../models/constant.enum';
+import { DataHelperService} from '../data-helper.service'
 
 @Component({
   selector: 'app-gallery',
@@ -15,34 +16,16 @@ export class GalleryComponent implements OnInit {
   imageUrl: any;
   loading: boolean = false;
 
-  constructor() {
-    this.getAllImages();
+  constructor(public service:DataHelperService) {
+    service.getObservable().subscribe(data => {
+      if (data.allImagesFetched) {
+        this.allImages = service.allImages;
+      } 
+    });
   }
 
   ngOnInit() {
   }
-
-
-  getAllImages() {
-    var self = this;
-    self.loading = true;
-    firebase.database().ref().child('gallery')
-      .orderByChild('uid').equalTo(localStorage.getItem('uid'))
-      .once('value', (snapshot) => {
-        var data = snapshot.val();
-        for (var key in data) {
-          var temp = data[key];
-          temp.key = key;
-          self.allImages.push(temp);
-        }
-        self.loading = false;
-      })
-      .catch((e) => {
-        console.log(e.message);
-        self.loading = false;
-      })
-  }
-
 
   copyUrl(index) {
     const selBox = document.createElement('textarea');
@@ -78,10 +61,10 @@ export class GalleryComponent implements OnInit {
     self.loading = true;
     let storageRef = firebase.storage().ref();
     var metadata = {
-      contentType: 'image/jpeg/png'
+      contentType: Constant.CONTENT_TYPE
     };
     const filename = Math.floor(Date.now() / 1000);
-    storageRef.child('galleryImages/' + filename).put(self.newImage, metadata)
+    storageRef.child(Constant.GALLERY_IMAGES + filename).put(self.newImage, metadata)
       .on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         (snapshot) => {
           snapshot.ref.getDownloadURL()
@@ -98,14 +81,14 @@ export class GalleryComponent implements OnInit {
 
   updateData(downloadURL) {
     var self = this;
-    var postKey = firebase.database().ref().child('gallery').push().key;
+    var postKey = firebase.database().ref().child(Constant._GALLERY_NODE).push().key;
     var updates = {};
     var temp = {
       imageUrl: downloadURL,
       uid: localStorage.getItem('uid'),
       timestamp: Number(new Date())
     }
-    updates['/gallery/' + postKey] = temp;
+    updates[Constant.GALLERY_NODE + postKey] = temp;
     firebase.database().ref().update(updates).then(() => {
       self.allImages.unshift(self.imageUrl);
       self.loading = false;

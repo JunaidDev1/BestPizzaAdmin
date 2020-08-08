@@ -51,9 +51,7 @@ export class DealsComponent implements OnInit {
     }
   }
 
-  removeItem(index) {
-    this.deal.items.splice(index, 1);
-  }
+
 
   editDeal(deal, index) {
     this.activeIndex = index;
@@ -81,13 +79,13 @@ export class DealsComponent implements OnInit {
     if (!self.deal.key) {
       self.deal.timestamp = Number(new Date());
       self.deal.uid = localStorage.getItem('uid');
-      postKey = firebase.database().ref().child('deals').push().key;
+      postKey = firebase.database().ref().child(Constant.DEAL_NODE).push().key;
       self.deal.key = postKey;
       self.allDeals.push(self.deal);
     } else {
       postKey = self.deal.key;
     }
-    updates['/deals/' + postKey] = self.deal;
+    updates[Constant.HOTDEAL_NODE + postKey] = self.deal;
     firebase.database().ref().update(updates).then(() => {
       alert(Constant.DEAL_SUCCESS);
       if (!self.deal.key) {

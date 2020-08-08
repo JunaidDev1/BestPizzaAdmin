@@ -3,6 +3,8 @@ import * as firebase from 'firebase';
 import { Deals } from './models/deals';
 import { Constant } from './models/constant.enum';
 import { Subject } from 'rxjs';
+import { Gallery } from './models/gallery';
+import { Pizzas } from './models/pizzas';
 
 
 @Injectable({
@@ -13,10 +15,13 @@ export class DataHelperService {
   public fooSubject = new Subject<any>();
 
   deal: Deals = new Deals();
+  allImages: Array<Gallery> = [];
   comboDeals: Array<Deals> = [];
   allDeals: Array<Deals> = [];
   allMeals: Array<Deals> = [];
   meal: Deals = new Deals();
+  pizza: Pizzas = new Pizzas();
+  allPizzas: Array<Pizzas> = [];
   loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
@@ -28,6 +33,8 @@ export class DataHelperService {
     this.getAllDeals();
     this.getComboAllDeals();
     this.getAllMeals();
+    this.getAllImages();
+    this.getAllPizza();
 
   }
 
@@ -73,7 +80,7 @@ export class DataHelperService {
 
   getAllMeals() {
     var self = this;
-    firebase.database().ref().child(Constant.SIDE_ORDER_Node)
+    firebase.database().ref().child(Constant.SIDE_ORDER_NODE)
       .once('value', (snapshot) => {
         var data = snapshot.val();
         for (var key in data) {
@@ -81,10 +88,52 @@ export class DataHelperService {
           temp.key = key;
           self.allMeals.push(temp);
         }
+        self.publishSomeData({ allMealsFetched: true });
       })
       .catch((e) => {
         console.log(e.message);
       });
+  }
+
+  getAllImages() {
+    var self = this;
+    self.loading = true;
+    firebase.database().ref().child(Constant._GALLERY_NODE)
+      .orderByChild('uid').equalTo(localStorage.getItem('uid'))
+      .once('value', (snapshot) => {
+        var data = snapshot.val();
+        for (var key in data) {
+          var temp = data[key];
+          temp.key = key;
+          self.allImages.push(temp);
+        }
+        self.loading = false;
+        self.publishSomeData({ allImagesFetched: true });
+      })
+      .catch((e) => {
+        console.log(e.message);
+        self.loading = false;
+      })
+  }
+
+  getAllPizza() {
+    var self = this;
+    self.loading = true;
+    firebase.database().ref().child(Constant._PIZZA_NODE)
+      .once('value', (snapshot) => {
+        var data = snapshot.val();
+        for (var key in data) {
+          var temp = data[key];
+          temp.key = key;
+          self.allPizzas.push(temp);
+        }
+        self.loading = false;
+        self.publishSomeData({ allPizzaFetched: true });
+      })
+      .catch((e) => {
+        console.log(e.message);
+        self.loading = false;
+      })
   }
 
   publishSomeData(temp: any) {
