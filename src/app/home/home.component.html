@@ -1,3 +1,6 @@
+<ngx-loading [show]="service.loading" [config]="{ backdropBorderRadius: '3px'}" [template]="customLoadingTemplate">
+</ngx-loading>
+
 <app-header></app-header>
 
 <div class="mainContent">
@@ -64,7 +67,7 @@
             </app-deals>
         </div>
         <div class="tab-pane container fade" id="menu1">
-            <app-sideorders [deletionMsg]="sideorderDeletionMsg" [firebaseNode]="sideorderNode" ></app-sideorders>
+            <app-sideorders [deletionMsg]="sideorderDeletionMsg" [firebaseNode]="sideorderNode"></app-sideorders>
         </div>
     </div>
 </div>

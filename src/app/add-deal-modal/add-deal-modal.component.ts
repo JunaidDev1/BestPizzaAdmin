@@ -28,15 +28,6 @@ export class AddDealModalComponent implements OnInit {
       this.dealItem = '';
     }
   }
-  // editDeal(deal, index) {
-  //   this.activeIndex = index;
-  //   this.deal = Object.assign({}, deal);
-  //   this.deal.items = [];
-  //   deal.items.forEach(element => {
-  //     this.deal.items.push(element);
-  //   });
-  // }
-
 
   emitCloseModal() {
     this.modalClosed.emit(false);
@@ -63,6 +54,6 @@ export class AddDealModalComponent implements OnInit {
       } else {
         self.allDeals[self.activeIndex] = self.deal;
       }
-    })
+    });
   }
 }

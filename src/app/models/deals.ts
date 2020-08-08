@@ -4,9 +4,7 @@ export class Deals {
     public imageUrl?: string;
     public name: string;
     public price: number;
-    public timestamp?: number;
-    public uid?: string;
-    public node?: string;
-    public message?: string;
+    public timestamp: number;
+    public uid: string;
 }
 

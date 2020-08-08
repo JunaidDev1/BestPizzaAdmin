@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as firebase from 'firebase';
 import { Constant } from '../models/constant.enum';
 import { Deals } from '../models/deals';
-import {DataHelperService} from '../data-helper.service';
+import { DataHelperService } from '../data-helper.service';
 
 @Component({
   selector: 'app-sideorders',
@@ -20,8 +20,9 @@ export class SideordersComponent implements OnInit {
   @Input() firebaseNode: string;
   @Input() deletionMsg: string;
 
-  constructor(public service:DataHelperService) {
-    this.allMeals=this.service.allMeals
+  constructor(
+    public service: DataHelperService) {
+    this.allMeals = this.service.allMeals;
   }
 
   ngOnInit() {
