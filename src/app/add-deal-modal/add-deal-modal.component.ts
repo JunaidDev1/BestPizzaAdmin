@@ -11,6 +11,7 @@ import { Constant } from '../models/constant.enum';
 export class AddDealModalComponent implements OnInit {
 
   @Input() deal: Deals;
+  @Input() firebaseNode: string;
   @Output() modalClosed = new EventEmitter<boolean>();
   allDeals: Array<Deals> = [];
   dealItem: any = '';
@@ -43,13 +44,14 @@ export class AddDealModalComponent implements OnInit {
     if (!self.deal.key) {
       self.deal.timestamp = Number(new Date());
       self.deal.uid = localStorage.getItem('uid');
-      postKey = firebase.database().ref().child(Constant.DEAL_NODE).push().key;
+      postKey = firebase.database().ref().child(self.firebaseNode).push().key;
       self.deal.key = postKey;
-      self.allDeals.push(self.deal);
+    
+
     } else {
       postKey = self.deal.key;
     }
-    updates[Constant.HOTDEAL_NODE + postKey] = self.deal;
+    updates[self.firebaseNode + postKey] = self.deal;
     firebase.database().ref().update(updates).then(() => {
       alert(Constant.DEAL_SUCCESS);
       if (!self.deal.key) {

@@ -17,6 +17,7 @@ export class GalleryComponent implements OnInit {
   loading: boolean = false;
 
   constructor(public service:DataHelperService) {
+    this.allImages=this.service.allImages;
     service.getObservable().subscribe(data => {
       if (data.allImagesFetched) {
         this.allImages = service.allImages;
@@ -91,6 +92,7 @@ export class GalleryComponent implements OnInit {
     updates[Constant.GALLERY_NODE + postKey] = temp;
     firebase.database().ref().update(updates).then(() => {
       self.allImages.unshift(self.imageUrl);
+      self.service.allImages.push(self.imageUrl)
       self.loading = false;
     })
   }

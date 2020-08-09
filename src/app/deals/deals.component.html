@@ -32,7 +32,7 @@
 
 
 <div *ngIf="modalClick" class="modal fade" id="addDeal">
-    <app-add-deal-modal [deal]="deal" (modalClosed)="closeModal($event)"></app-add-deal-modal>
+    <app-add-deal-modal [deal]="deal" [firebaseNode]="firebaseNode" (modalClosed)="closeModal($event)"></app-add-deal-modal>
 </div>
 
 

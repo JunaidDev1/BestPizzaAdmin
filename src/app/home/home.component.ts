@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
   sideorderNode: string;
 
   constructor(public service: DataHelperService) {
-    // this.allDeals = this.service.allDeals;
-    // this.comboDeals = this.service.comboDeals;
+    this.allDeals = this.service.allDeals;
+    this.comboDeals = this.service.comboDeals;
 
     service.getObservable().subscribe(data => {
       if (data.allDealsFetched) {

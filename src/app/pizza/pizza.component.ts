@@ -17,6 +17,7 @@ export class PizzaComponent implements OnInit {
   activeIndex: any;
 
   constructor(public service: DataHelperService) {
+    this.allPizzas=this.service.allPizzas;
     service.getObservable().subscribe(data => {
       if (data.allPizzaFetched) {
         this.allPizzas = service.allPizzas;
