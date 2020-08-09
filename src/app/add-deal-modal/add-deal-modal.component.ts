@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Deals } from '../models/deals';
 import * as firebase from 'firebase';
 import { Constant } from '../models/constant.enum';
+import { DataHelperService } from '../data-helper.service';
 
 @Component({
   selector: 'app-add-deal-modal',
@@ -13,18 +14,18 @@ export class AddDealModalComponent implements OnInit {
   @Input() deal: Deals;
   @Input() firebaseNode: string;
   @Output() modalClosed = new EventEmitter<boolean>();
-  allDeals: Array<Deals> = [];
-  dealItem: any = '';
-  activeIndex: any;
+  dealItem: string = '';
 
-  constructor() { }
+  constructor(
+    public service: DataHelperService
+  ) { }
 
   ngOnInit() {
 
   }
 
   addItem() {
-    if (this.dealItem != '') {
+    if (this.dealItem !== '') {
       this.deal.items.push(this.dealItem);
       this.dealItem = '';
     }
@@ -33,6 +34,8 @@ export class AddDealModalComponent implements OnInit {
   emitCloseModal() {
     this.modalClosed.emit(false);
   }
+
+
   removeItem(index) {
     this.deal.items.splice(index, 1);
   }
@@ -45,9 +48,6 @@ export class AddDealModalComponent implements OnInit {
       self.deal.timestamp = Number(new Date());
       self.deal.uid = localStorage.getItem('uid');
       postKey = firebase.database().ref().child(self.firebaseNode).push().key;
-      self.deal.key = postKey;
-    
-
     } else {
       postKey = self.deal.key;
     }
@@ -55,10 +55,27 @@ export class AddDealModalComponent implements OnInit {
     firebase.database().ref().update(updates).then(() => {
       alert(Constant.DEAL_SUCCESS);
       if (!self.deal.key) {
-        self.deal = new Deals();
+        self.deal.key = postKey;
+        self.firebaseNode === Constant.HOTDEAL_NODE ? self.service.allDeals.unshift(self.deal)
+          : self.service.comboDeals.unshift(self.deal);
+        self.service.publishSomeData({ allDealsFetched: true });
+        self.service.publishSomeData({ comboDealsFetched: true });
       } else {
-        self.allDeals[self.activeIndex] = self.deal;
+        self.replaceDealInService();
       }
     });
   }
+
+
+  replaceDealInService() {
+    let serviceArray: Array<Deals> = [];
+    serviceArray = this.firebaseNode === Constant.HOTDEAL_NODE ? this.service.allDeals : this.service.comboDeals;
+
+    let index: number;
+    index = serviceArray.findIndex(deal => deal.key === this.deal.key);
+    serviceArray[index] = this.deal;
+    this.service.publishSomeData({ allDealsFetched: true });
+    this.service.publishSomeData({ comboDealsFetched: true });
+  }
+
 }

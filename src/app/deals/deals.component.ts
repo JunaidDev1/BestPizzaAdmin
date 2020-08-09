@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as firebase from 'firebase';
 import { Deals } from '../models/deals';
-import { Constant } from '../models/constant.enum';
-import { DataHelperService} from '../data-helper.service'
+import { DataHelperService } from '../data-helper.service';
 
 
 @Component({
@@ -20,7 +18,6 @@ export class DealsComponent implements OnInit {
   modalClick: boolean;
   modalClickDel: boolean;
   deal: Deals = new Deals();
-  loading: boolean = false;
   dealItem: any = '';
   activeIndex: any;
 
@@ -42,17 +39,19 @@ export class DealsComponent implements OnInit {
   closeModal(e: boolean) {
     this.modalClick = e;
   }
+
+
   closeModalDel(e: boolean) {
     this.modalClickDel = e;
   }
+
+
   addItem() {
-    if (this.dealItem != '') {
+    if (this.dealItem !== '') {
       this.deal.items.push(this.dealItem);
       this.dealItem = '';
     }
   }
-
-
 
   editDeal(deal, index) {
     this.activeIndex = index;
@@ -64,12 +63,12 @@ export class DealsComponent implements OnInit {
     this.modalClick = true;
   }
 
+
   deleteDeal(deal, index) {
     this.activeIndex = index;
     this.message = deal.message;
     this.modalClickDel = true;
     this.deal = deal;
-    this.activeIndex = index;
   }
 
 

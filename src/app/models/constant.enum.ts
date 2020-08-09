@@ -18,9 +18,9 @@ export enum Constant {
     SIDE_ORDER_NODE = 'sideorders',
     _GALLERY_NODE = 'gallery',
     GALLERY_NODE = '/gallery/',
-    GALLERY_IMAGES= 'galleryImages/',
+    GALLERY_IMAGES = 'galleryImages/',
     CONTENT_TYPE = 'image/jpeg/png',
-    _PIZZA_NODE='pizzas',
-    PIZZA_NODE='/pizzas/'
+    _PIZZA_NODE = 'pizzas',
+    PIZZA_NODE = '/pizzas/'
 
 }

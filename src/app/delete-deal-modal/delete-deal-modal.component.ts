@@ -13,13 +13,8 @@ export class DeleteDealModalComponent implements OnInit {
 
   @Output() modalClosedDel = new EventEmitter<boolean>();
   @Input() allDeals: Array<Deals> = [];
-  @Input() message: string;
   @Input() activeIndex: any;
   @Input() firebaseNode: string;
-  @Input() deal: Deals = new Deals();
-
-  loading: boolean = false;
-  dealItem: any = '';
 
   constructor() { }
 
