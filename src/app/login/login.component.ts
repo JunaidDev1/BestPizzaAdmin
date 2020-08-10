@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Constant } from './../models/constant.enum';
+import { DataHelperService } from '../data-helper.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,6 @@ import { Constant } from './../models/constant.enum';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   onLoginForm: FormGroup;
   email: string = '';
   resetEmail: string;
@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public _fb: FormBuilder
+    public _fb: FormBuilder,
+    public service: DataHelperService
   ) {
     localStorage.setItem('userLoggedIn', 'false');
   }
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
     firebase.database().ref().child('users/' + this.uid)
       .once('value', (snapshot) => {
         var user = snapshot.val();
-        alert(Constant.lOGGED_IN);
+        this.service.publishSomeData({alertMessage: Constant.lOGGED_IN, type:Constant.SUCCESS_MSG});
         localStorage.setItem('firstName', user.firstName);
         localStorage.setItem('lastName', user.lastName);
         localStorage.setItem('email', user.email);
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
       })
       .catch((e) => {
         this.loading = false;
-        alert(e.message);
+        this.service.publishSomeData({alertMessage: e.message, type:Constant.ERROR_MSG});
       });
   }
 
@@ -77,13 +78,14 @@ export class LoginComponent implements OnInit {
   resetPassword() {
     firebase.auth().sendPasswordResetEmail(this.email)
       .then(() => {
-        alert(Constant.RESET_LOGIN);
+        this.service.publishSomeData({alertMessage: Constant.RESET_LOGIN, type:Constant.SUCCESS_MSG});
         this.email = '';
       })
       .catch((e) => {
         this.email = '';
-        alert(e);
+        this.service.publishSomeData({alertMessage: e.message, type:Constant.ERROR_MSG});
       })
   }
+
 
 }

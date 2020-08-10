@@ -40,7 +40,7 @@ export class GalleryComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    alert(Constant.LINK_COPY);
+    this.service.publishSomeData({alertMessage: Constant.LINK_COPY, type:Constant.SUCCESS_MSG});
   }
 
 
@@ -73,7 +73,7 @@ export class GalleryComponent implements OnInit {
               self.updateData(downloadURL);
             })
             .catch((e) => {
-              console.log(e.message);
+              this.service.publishSomeData({alertMessage: e.message, type:Constant.ERROR_MSG});
               self.loading = false;
             })
         });

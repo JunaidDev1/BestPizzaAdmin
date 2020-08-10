@@ -1,8 +1,11 @@
 export enum Constant {
     lOGGED_IN = 'You are successfully logged in!',
+    lOGGED_OUT = 'You are successfully logged out!',
     RESET_LOGIN = 'Check your email and click the link to reset your password!',
     DEAL_SUCCESS = 'Deal saved successfully!!!',
     DEAL_REMOVE = 'Deal removed permanently!!',
+    SIDE_ORDER = 'Side Order added successfully',
+    REMOVE= 'removed permanently!!',
     LINK_COPY = 'Link copied!!!',
     PIZZA_REMOVE = 'Pizza removed permanently!!',
     MEAL_REMOVED = 'Meal removed from database!',
@@ -21,6 +24,8 @@ export enum Constant {
     GALLERY_IMAGES = 'galleryImages/',
     CONTENT_TYPE = 'image/jpeg/png',
     _PIZZA_NODE = 'pizzas',
-    PIZZA_NODE = '/pizzas/'
+    PIZZA_NODE = '/pizzas/',
+    SUCCESS_MSG = 'success',
+    ERROR_MSG = 'danger'
 
 }

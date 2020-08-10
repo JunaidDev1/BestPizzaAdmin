@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Deals } from '../models/deals';
 import * as firebase from 'firebase';
 import { Constant } from '../models/constant.enum';
+import { DataHelperService } from '../data-helper.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class DeleteDealModalComponent implements OnInit {
   @Input() message: string;
   @Input() firebaseNode: string;
 
-  constructor() { }
+  constructor(public service: DataHelperService) { }
 
   ngOnInit() {
   }
@@ -32,7 +33,7 @@ export class DeleteDealModalComponent implements OnInit {
     var updates = {};
     updates[`${this.firebaseNode}` + self.allDeals[self.activeIndex].key] = null;
     firebase.database().ref().update(updates).then(() => {
-      alert(Constant.DEAL_REMOVE);
+      this.service.publishSomeData({alertMessage: `${this.message} `+ Constant.REMOVE, type:Constant.ERROR_MSG});
       self.emitCloseModal();
       self.allDeals.splice(self.activeIndex, 1);
     });

@@ -53,7 +53,7 @@ export class AddDealModalComponent implements OnInit {
     }
     updates[self.firebaseNode + postKey] = self.deal;
     firebase.database().ref().update(updates).then(() => {
-      alert(Constant.DEAL_SUCCESS);
+      this.service.publishSomeData({alertMessage: Constant.DEAL_SUCCESS, type:Constant.SUCCESS_MSG});
       if (!self.deal.key) {
         self.deal.key = postKey;
         self.firebaseNode === Constant.HOTDEAL_NODE ? self.service.allDeals.unshift(self.deal)
@@ -71,7 +71,6 @@ export class AddDealModalComponent implements OnInit {
   replaceDealInService() {
     let serviceArray: Array<Deals> = [];
     serviceArray = this.firebaseNode === Constant.HOTDEAL_NODE ? this.service.allDeals : this.service.comboDeals;
-
     let index: number;
     index = serviceArray.findIndex(deal => deal.key === this.deal.key);
     serviceArray[index] = this.deal;

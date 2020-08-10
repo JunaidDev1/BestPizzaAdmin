@@ -45,7 +45,7 @@ export class SideordersComponent implements OnInit {
     var updates = {};
     updates[Constant.SIDEORDER_NODE + postKey] = self.meal;
     firebase.database().ref().update(updates).then(() => {
-      alert(Constant.DEAL_SUCCESS);
+      this.service.publishSomeData({alertMessage: Constant.SIDE_ORDER, type:Constant.SUCCESS_MSG});
       if (!self.meal.key) {
         self.meal.key = postKey;
         self.allMeals.unshift(self.meal);

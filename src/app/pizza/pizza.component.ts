@@ -54,7 +54,7 @@ export class PizzaComponent implements OnInit {
     }
     updates[Constant.PIZZA_NODE + postKey] = self.pizza;
     firebase.database().ref().update(updates).then(() => {
-      alert(Constant.DEAL_SUCCESS);
+      this.service.publishSomeData({alertMessage: Constant.DEAL_SUCCESS, type:Constant.SUCCESS_MSG});
       if (!self.pizza.key) {
         self.pizza.key = postKey;
         self.allPizzas.unshift(self.pizza);
@@ -70,7 +70,7 @@ export class PizzaComponent implements OnInit {
     var updates = {};
     updates[Constant.PIZZA_NODE + self.allPizzas[self.activeIndex].key] = null;
     firebase.database().ref().update(updates).then(() => {
-      alert(Constant.PIZZA_REMOVE);
+      this.service.publishSomeData({alertMessage: Constant.PIZZA_REMOVE, type:Constant.ERROR_MSG});
       self.allPizzas.splice(self.activeIndex, 1);
     });
   }

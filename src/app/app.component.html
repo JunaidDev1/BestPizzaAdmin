@@ -1,2 +1,5 @@
 <router-outlet (activate)="onActivate($event)"></router-outlet>
 
+<div *ngIf="showAlert" class="alertBanner alert alert-{{type}}">
+    <strong>{{message}}</strong>
+  </div>
