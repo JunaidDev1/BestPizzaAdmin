@@ -64,6 +64,7 @@ export class AddDealModalComponent implements OnInit {
         self.replaceDealInService();
       }
     });
+    this.emitCloseModal()
   }
 
 

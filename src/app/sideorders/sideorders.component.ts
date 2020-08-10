@@ -47,7 +47,7 @@ export class SideordersComponent implements OnInit {
       alert(Constant.DEAL_SUCCESS);
       if (!self.meal.key) {
         self.meal.key = postKey;
-        self.allMeals.push(self.meal);
+        self.allMeals.unshift(self.meal);
       }
       self.meal = new Deals();
     })
