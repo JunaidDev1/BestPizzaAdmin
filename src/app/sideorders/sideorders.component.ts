@@ -22,11 +22,12 @@ export class SideordersComponent implements OnInit {
 
   constructor(
     public service: DataHelperService) {
-      service.getObservable().subscribe(data => {
-        if (data.allMealsFetched) {
-          this.allMeals = service.allMeals;
-        } 
-      });
+    this.allMeals = service.allMeals;
+    service.getObservable().subscribe(data => {
+      if (data.allMealsFetched) {
+        this.allMeals = service.allMeals;
+      }
+    });
   }
 
   ngOnInit() {
@@ -35,7 +36,7 @@ export class SideordersComponent implements OnInit {
 
   addMeal() {
     var self = this;
-    var postKey
+    var postKey;
     if (!self.meal.key) {
       postKey = firebase.database().ref().child(Constant.SIDE_ORDER_NODE).push().key;
     } else {
@@ -50,9 +51,13 @@ export class SideordersComponent implements OnInit {
         self.allMeals.unshift(self.meal);
       }
       self.meal = new Deals();
-    })
+    });
   }
 
+
+  emptyPreviousDeal() {
+    this.meal = new Deals();
+  }
 
   updateMeal(meal) {
     this.meal = meal;

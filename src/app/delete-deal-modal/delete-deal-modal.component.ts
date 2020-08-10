@@ -12,7 +12,7 @@ import { Constant } from '../models/constant.enum';
 export class DeleteDealModalComponent implements OnInit {
 
   @Output() modalClosedDel = new EventEmitter<boolean>();
-  @Input() deal: Deals = new Deals();
+  @Input() deal: Deals;
   @Input() allDeals: Array<Deals> = [];
   @Input() activeIndex: any;
   @Input() message: string;

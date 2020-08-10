@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.compose([
         Validators.required
       ])]
-    })
+    });
   }
 
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       .catch((e) => {
         this.loading = false;
         alert(e.message);
-      })
+      });
   }
 
 
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
       .catch((e) => {
         this.loading = false;
         alert(e.message);
-      })
+      });
   }
 
 

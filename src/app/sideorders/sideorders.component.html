@@ -2,7 +2,8 @@
 
     <div class="col-md-12 my-3">
         <h4>Side Orders ({{allMeals.length}})
-            <button data-toggle="modal" data-target="#addMeal" class="btn btn-primary float-right">Add New Meal</button>
+            <button (click)="emptyPreviousDeal()" data-toggle="modal" data-target="#addMeal"
+                class="btn btn-primary float-right">Add New Meal</button>
         </h4>
     </div>
 
@@ -79,6 +80,6 @@
 
 
 <div *ngIf="modalClickDel" class="modal fade" id="deleteMeal">
-    <app-delete-deal-modal [deal]="meal" [allDeals]="allMeals" [message]="deletionMsg"
-    [firebaseNode]="firebaseNode" [activeIndex]="activeIndex" (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
+    <app-delete-deal-modal [deal]="meal" [allDeals]="allMeals" [message]="deletionMsg" [firebaseNode]="firebaseNode"
+        [activeIndex]="activeIndex" (modalClosedDel)="closeModalDel($event)"></app-delete-deal-modal>
 </div>
