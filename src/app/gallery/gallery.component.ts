@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { Gallery } from '../models/gallery';
 import { Constant } from '../models/constant.enum';
-import { DataHelperService} from '../data-helper.service'
+import { DataHelperService } from '../data-helper.service'
 
 @Component({
   selector: 'app-gallery',
@@ -16,12 +16,12 @@ export class GalleryComponent implements OnInit {
   imageUrl: any;
   loading: boolean = false;
 
-  constructor(public service:DataHelperService) {
-    this.allImages=this.service.allImages;
+  constructor(public service: DataHelperService) {
+    this.allImages = this.service.allImages;
     service.getObservable().subscribe(data => {
       if (data.allImagesFetched) {
         this.allImages = service.allImages;
-      } 
+      }
     });
   }
 
@@ -40,7 +40,7 @@ export class GalleryComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    this.service.publishSomeData({alertMessage: Constant.LINK_COPY, type:Constant.SUCCESS_MSG});
+    this.service.publishSomeData({ alertMessage: Constant.LINK_COPY, type: Constant.SUCCESS_MSG });
   }
 
 
@@ -73,7 +73,7 @@ export class GalleryComponent implements OnInit {
               self.updateData(downloadURL);
             })
             .catch((e) => {
-              this.service.publishSomeData({alertMessage: e.message, type:Constant.ERROR_MSG});
+              this.service.publishSomeData({ alertMessage: e.message, type: Constant.ERROR_MSG });
               self.loading = false;
             })
         });
@@ -88,13 +88,13 @@ export class GalleryComponent implements OnInit {
       imageUrl: downloadURL,
       uid: localStorage.getItem('uid'),
       timestamp: Number(new Date())
-    }
+    };
     updates[Constant.GALLERY_NODE + postKey] = temp;
     firebase.database().ref().update(updates).then(() => {
       self.allImages.unshift(self.imageUrl);
-      self.service.allImages.push(self.imageUrl)
+      self.service.allImages.push(self.imageUrl);
       self.loading = false;
-    })
+    });
   }
 
 }

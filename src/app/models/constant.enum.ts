@@ -4,7 +4,7 @@ export enum Constant {
     RESET_LOGIN = 'Check your email and click the link to reset your password!',
     DEAL_SUCCESS = 'Deal saved successfully!!!',
     DEAL_REMOVE = 'Deal removed permanently!!',
-    SIDE_ORDER = 'Side Order added successfully',
+    SIDE_ORDER = 'Side Order saved successfully',
     REMOVE= 'removed permanently!!',
     LINK_COPY = 'Link copied!!!',
     PIZZA_REMOVE = 'Pizza removed permanently!!',

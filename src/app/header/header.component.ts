@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     public service: DataHelperService
   ) {
-    if (localStorage.getItem('userLoggedIn') != 'true') {
+    if (localStorage.getItem('userLoggedIn') !== 'true') {
       this.logout();
     }
   }
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
-    this.service.publishSomeData({alertMessage: Constant.lOGGED_OUT, type:Constant.SUCCESS_MSG});
+    this.service.publishSomeData({ alertMessage: Constant.lOGGED_OUT, type: Constant.SUCCESS_MSG });
   }
 
 }
