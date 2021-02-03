@@ -5,6 +5,8 @@ import { Constant } from './models/constant.enum';
 import { Subject } from 'rxjs';
 import { Gallery } from './models/gallery';
 import { Pizzas } from './models/pizzas';
+import { HttpClient } from '@angular/common/http';
+import { apiUser } from './models/api-user';
 
 
 @Injectable({
@@ -13,6 +15,8 @@ import { Pizzas } from './models/pizzas';
 export class DataHelperService {
 
   public fooSubject = new Subject<any>();
+
+  baseUrl: string = 'https://jsonplaceholder.typicode.com/users';
 
   deal: Deals = new Deals();
   allImages: Array<Gallery> = [];
@@ -29,14 +33,22 @@ export class DataHelperService {
   comboDealNode: string;
   sideorderNode: string;
 
-  constructor() {
+  constructor(
+    public httpClient: HttpClient
+  ) {
     this.getAllDeals();
     this.getComboAllDeals();
     this.getAllMeals();
     this.getAllImages();
     this.getAllPizza();
-
+    this.getAPiUsers();
   }
+
+
+  getAPiUsers() {
+    return this.httpClient.get(this.baseUrl).toPromise();
+  }
+
 
   getAllDeals() {
     var self = this;

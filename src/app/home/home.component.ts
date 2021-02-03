@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Deals } from '../models/deals';
 import { Constant } from '../models/constant.enum';
+import { apiUser } from '../models/api-user';
 import { DataHelperService } from '../data-helper.service'
 
 @Component({
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit {
   dealNode: string;
   comboDealNode: string;
   sideorderNode: string;
+
+  apiUsersList: apiUser[] = [];
 
   constructor(public service: DataHelperService) {
     this.allDeals = this.service.allDeals;
@@ -41,5 +44,15 @@ export class HomeComponent implements OnInit {
     this.dealNode = Constant.HOTDEAL_NODE;
     this.comboDealNode = Constant.COMBODEAL_NODE;
     this.sideorderNode = Constant.SIDEORDER_NODE;
+
+    this.getAllUsers();
   }
+
+  getAllUsers() {
+    // this.service.getAPiUsers().subscribe((res: any) => {
+    //   this.apiUsersList = res;
+    // });
+  }
+
+
 }

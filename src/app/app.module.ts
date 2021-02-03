@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
 import { AddDealModalComponent } from './add-deal-modal/add-deal-modal.component';
 import { DeleteDealModalComponent } from './delete-deal-modal/delete-deal-modal.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyAXCOrAkv40o6thOiiw8PgCnmDmSg9FTYk",
@@ -48,6 +50,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({
       fullScreenBackdrop: true
